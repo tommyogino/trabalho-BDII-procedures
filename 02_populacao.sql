@@ -1,0 +1,52 @@
+USE Universidade;
+GO
+-- Rodar UMA vez só, depois do 01_criacao.sql.
+-- Ordem: CURSOS e PROFESSOR antes de MATERIAS (por causa das FKs).
+
+INSERT CURSOS
+(
+	CURSO,
+	NOME
+)
+VALUES
+('ADM', 'ADMINISTRAÇÃO'),
+('SIS', 'SISTEMAS DE INFORMAÇÃO');
+GO
+
+-- DORNEL = 1 e WALTER = 2 (já existem); estes recebem 3, 4 e 5
+INSERT PROFESSOR
+(
+	NOME
+)
+VALUES
+('MARIA'),
+('CARLOS'),
+('ANA');
+GO
+
+INSERT MATERIAS
+(
+	SIGLA,
+	NOME,
+	CARGAHORARIA,
+	CURSO,
+	PROFESSOR
+)
+VALUES
+-- ENG (já tem BDA e PRG)
+('CAL', 'CÁLCULO', 80, 'ENG', 3),
+('FIS', 'FÍSICA', 72, 'ENG', 4),
+-- ADM
+('CON', 'CONTABILIDADE', 80, 'ADM', 5),
+('ECO', 'ECONOMIA', 72, 'ADM', 3),
+('MKT', 'MARKETING', 72, 'ADM', 4),
+-- SIS
+('ALG', 'ALGORITMOS', 144, 'SIS', 2),
+('RED', 'REDES DE COMPUTADORES', 80, 'SIS', 5),
+('SBD', 'SISTEMAS DE BANCO DE DADOS', 144, 'SIS', 1);
+GO
+
+-- Conferência
+SELECT * FROM CURSOS;
+SELECT * FROM PROFESSOR;
+SELECT * FROM MATERIAS ORDER BY CURSO, SIGLA;
